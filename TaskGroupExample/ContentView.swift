@@ -8,17 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var viewModel: ContentViewModel
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text(viewModel.text)
+            Button {
+//                viewModel.getData()
+                viewModel.getDataWithThrow()
+            } label: {
+                Text("execute taskGroup")
+            }
         }
+        .isLoading(viewModel.isLoading)
         .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: ContentViewModel())
 }
